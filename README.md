@@ -55,6 +55,51 @@ This repository demonstrates professional-grade proficiency in cloud-native data
 * **Scalable ROI**: Proven ability to handle enterprise-level datasets (GB to TB scale) with near-linear performance gains.
 * **End-to-End Ownership**: Managed the complete data lifecycle—from cloud ingestion to predictive deployment.
 
+
+
+## 🌐 Cloud Infrastructure Setup (GCP)
+
+This project is architected to run on a multi-node distributed cluster. Follow these steps to provision the environment:
+
+### 1. Storage Configuration (GCS)
+
+* **Create Bucket**: Create a Google Cloud Storage bucket (e.g., `gs://toys-bigdata-analytics/`).
+* **Data Ingestion**: Upload the `Toys_and_Games.jsonl` file into a folder named `/raw_data/`.
+
+### 2. Provisioning the Dataproc Cluster (The "Engine")
+
+Submit this via the GCP Cloud Shell to create your compute environment:
+
+```bash
+gcloud dataproc clusters create toy-analytics-cluster \
+    --region=europe-west3 \
+    --master-machine-type=n1-standard-2 \
+    --worker-machine-type=n1-standard-2 \
+    --num-workers=2 \
+    --image-version=2.0-debian10 \
+    --enable-component-gateway \
+    --optional-components=HIVE_WEBHCAT
+
+```
+
+* **Master Node**: Handles job coordination and Spark driver execution.
+* **Worker Nodes**: Two nodes (n1-standard-2) dedicated to distributed data processing and ML training.
+
+### 3. Submitting the Spark Job
+
+Once the cluster is "Running," submit your PySpark script:
+
+1. Upload `main.py` and `mllib_model.py` to your GCS bucket.
+2. Run the following command:
+
+```bash
+gcloud dataproc jobs submit pyspark gs://[YOUR_BUCKET]/scripts/main.py \
+    --cluster=toy-analytics-cluster \
+    --region=europe-west3
+
+```
+
+
 ## 👨‍💻 Project Stewardship
 
 * **Lead Developer**: **Shreya Malogi** (Founder @ [Codemacrocosm](https://github.com/shreyamalogi))
