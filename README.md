@@ -6,6 +6,8 @@
 
 In a global marketplace like Amazon, the integrity of a **"Verified Purchase"** is the cornerstone of consumer trust. Fraudulent or unverified reviews can distort recommender systems and mislead millions of shoppers. This project tells the story of building a **Scalable Big Data Pipeline**—moving beyond local processing to the cloud—to automate the detection of review authenticity using distributed Machine Learning.
 
+
+
 ---
 
 ## 🏗️ Chapter 1: The Heavy Lifter (Distributed ETL)
@@ -76,11 +78,13 @@ gcloud dataproc jobs submit pyspark gs://[YOUR_BUCKET]/scripts/main.py \
 
 ---
 
-## 📊 Dataset & Analytical Insights
 
-* **Source**: Amazon Product Review Dataset (Toys & Games).
-* **Volume**: ~8GB of raw review metadata.
+
+## 📊 Dataset & Analytical Insights
+* **Source**: [Amazon Product Review Dataset (2018) - Toys & Games](https://nijianmo.github.io/amazon/index.html)
+* **Volume**: ~8GB of raw review metadata (JSONL format).
 * **KPIs Tracked**: Average ratings, review helpfulness density, and stopword-optimized word frequency distributions.
+* **Scope**: This project specifically processes the "Toys and Games" category to evaluate trust signals at scale.
 
 | Tier | Tool / Platform | Purpose |
 | --- | --- | --- |
